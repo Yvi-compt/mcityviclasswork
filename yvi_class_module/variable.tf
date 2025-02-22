@@ -23,6 +23,7 @@ variable "account_replication_type" {
 variable "admin_user"{
 type=string
 }
-variable "admin_password"{
+/*variable "admin_password"{
 type=string
 }
+*/

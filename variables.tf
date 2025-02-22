@@ -13,7 +13,7 @@ variable "tenant_id"{
 }
 variable "admin_username" {
   description = "The admin username of the VM that will be deployed"
-  default     = "azureuser"
+  default     = "adminuser"
 }
 variable "storage_account_type" {
   description = "Defines the type of storage account to be created. Valid options are Standard_LRS, Standard_ZRS, Standard_GRS, Standard_RAGRS, Premium_LRS."

@@ -1,4 +1,4 @@
-module "linuxservers" {
+astmodule "linuxservers" {
     source              = "Azure/vm/azurerm"
     location            = "eastus"
     vm_os_simple        = "UbuntuServer"
@@ -19,6 +19,6 @@ module "linuxservers" {
   module "vnet" {
     source              = "Azure/vnet/azurerm"
     version             = "~> 1.0.0"
-    location            = "West US 2"
+    location            = "eastus"
     resource_group_name = "terraform-vm"
   }

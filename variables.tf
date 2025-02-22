@@ -11,6 +11,20 @@ variable "client_secret"{
 variable "tenant_id"{
   type=string
 }
+variable "resource_group_name" {
+  description = "The name of the storage account resource group"
+}
+
+variable "location" {
+  description = "The Azure region where the storage account will be created"
+  default     = "eastus"
+}
+
+variable "account_tier" {
+  description = "The storage account tier (Standard or Premium)"
+  default     = "Standard"
+}
+
 variable "admin_username" {
   description = "The admin username of the VM that will be deployed"
   default     = "adminuser"

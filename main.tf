@@ -1,6 +1,6 @@
-provider "azurerm" {
+/*provider "azurerm" {
   features {}
-}
+}*/
 
 resource "azurerm_resource_group" "yvirg" {
   name     = var.resource_group_name
@@ -10,7 +10,7 @@ resource "azurerm_resource_group" "yvirg" {
 resource "azurerm_virtual_network" "yvivnet" {
   name                = "myVNet"
   location            = var.location
-  resource_group_name = azurerm_resource_group.rg.name
+  resource_group_name = azurerm_resource_group.yvirg.name
   address_space       = ["10.0.0.0/16"]
 }
 

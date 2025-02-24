@@ -38,11 +38,11 @@ resource "azurerm_virtual_machine" "yvivm" {
     }
   }
 
-  source_image_reference {
+  /*source_image_reference {
     publisher = var.is_windows ? "MicrosoftWindowsServer" : "Canonical"
     offer     = var.is_windows ? "WindowsServer" : "UbuntuServer"
     sku       = var.is_windows ? "2019-Datacenter-smalldisk" : "20.04-LTS"
     version   = "latest"
-  }
+  }*/
 }
 

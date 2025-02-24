@@ -1,46 +1,47 @@
-resource "azurerm_linux_virtual_machine" "linux_yvivm" {
-  name                = var.vm_name
-  resource_group_name = var.resource_group_name
+resource "azurerm_network_interface" "yvivm_nic" {
+  name                = "${var.vm_name}-nic"
   location            = var.location
-  size                = var.vm_size
-  admin_username      = var.admin_username
-  network_interface_ids = [var.network_interface_id]
+  resource_group_name = var.resource_group_name
 
-  os_disk {
-    caching              = "ReadWrite"
-    storage_account_type = "Standard_LRS"
-  }
-
-  admin_ssh_key {
-    username   = var.admin_username
-    public_key = file(var.ssh_key_path)
-  }
-
-  source_image_reference {
-    publisher = "Canonical"
-    offer     = "UbuntuServer"
-    sku       = "20.04-LTS"
-    version   = "latest"
+  ip_configuration {
+    name                          = "internal"
+    subnet_id                     = var.subnet_id
+    private_ip_address_allocation = "Dynamic"
   }
 }
-resource "azurerm_windows_virtual_machine" "windows_yvivm" {
-  name                = var.vm_name
-  resource_group_name = var.resource_group_name
-  location            = var.location
-  size                = var.vm_size
-  admin_username      = var.admin_username
-  admin_password      = var.admin_password
-  network_interface_ids = [var.network_interface_id]
 
-  os_disk {
-    caching              = "ReadWrite"
-    storage_account_type = "Standard_LRS"
+resource "azurerm_virtual_machine" "yvivm" {
+  name                  = var.vm_name
+  location              = var.location
+  resource_group_name   = var.resource_group_name
+  network_interface_ids = [azurerm_network_interface.vm_nic.id]
+  vm_size               = var.vm_size
+
+  storage_os_disk {
+    name              = "${var.vm_name}-osdisk"
+    caching           = "ReadWrite"
+    create_option     = "FromImage"
+    managed_disk_type = "Standard_LRS"
+  }
+
+  os_profile {
+    computer_name  = var.vm_name
+    admin_username = var.admin_username
+    admin_password = var.is_windows ? var.admin_password : null
+  }
+
+  os_profile_linux_config {
+    disable_password_authentication = true
+    ssh_keys {
+      path     = "/home/${var.admin_username}/.ssh/authorized_keys"
+      key_data = var.is_windows ? "" : file(var.ssh_key_path)
+    }
   }
 
   source_image_reference {
-    publisher = "MicrosoftWindowsServer"
-    offer     = "WindowsServer"
-    sku       = "2019-Datacenter-smalldisk"
+    publisher = var.is_windows ? "MicrosoftWindowsServer" : "Canonical"
+    offer     = var.is_windows ? "WindowsServer" : "UbuntuServer"
+    sku       = var.is_windows ? "2019-Datacenter-smalldisk" : "20.04-LTS"
     version   = "latest"
   }
 }

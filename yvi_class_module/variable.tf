@@ -1,14 +1,9 @@
-variable "storage_account_name" {
-  description = "The name of the storage account"
-}
-variable "account_replication_type" {
-  description = "The storage account replication type"
-  default     = "LRS"
-}
-variable "admin_user"{
-type=string
-}
-/*variable "admin_password"{
-type=string
-}
-*/
+variable "vm_name" {}
+variable "location" {}
+variable "resource_group_name" {}
+variable "subnet_id" {}
+variable "vm_size" {}
+variable "admin_username" {}
+variable "admin_password" {}
+variable "is_windows" { type = bool }
+variable "ssh_key_path" { default = "~/.ssh/id_rsa.pub" }

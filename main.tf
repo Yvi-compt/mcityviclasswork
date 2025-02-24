@@ -29,6 +29,7 @@ module "linux_vm" {
   subnet_id          = azurerm_subnet.subnet.id
   vm_size            = "Standard_B2ms"
   admin_username     = "azureuser"
+  admin_password     = var.admin_password
   is_windows         = false
   ssh_key_path       = "~/.ssh/id_rsa.pub"
 }

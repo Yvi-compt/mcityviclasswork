@@ -43,6 +43,6 @@ resource "azurerm_virtual_machine" "yvivm" {
     offer     = var.is_windows ? "WindowsServer" : "UbuntuServer"
     sku       = var.is_windows ? "2019-Datacenter-smalldisk" : "20.04-LTS"
     version   = "latest"
-  }
-}*/
+  }*/
+}
 

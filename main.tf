@@ -34,7 +34,7 @@ module "linux_vm" {
 }
 
 module "windows_vm" {
-  source              = "./yvi_class_module/virtual_machine"
+  source              = "./yvi_class_module"
   vm_name             = "windows-vm"
   location           = var.location
   resource_group_name = azurerm_resource_group.yvirg.name

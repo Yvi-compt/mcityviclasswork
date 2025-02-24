@@ -22,7 +22,7 @@ resource "azurerm_subnet" "subnet" {
 }
 
 module "linux_vm" {
-  source              = "./yvi_class_module/virtual_machine"
+  source              = "./yvi_class_module"
   vm_name             = "linux-vm"
   location           = var.location
   resource_group_name = azurerm_resource_group.yvirg.name

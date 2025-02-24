@@ -41,6 +41,6 @@ module "windows_vm" {
   subnet_id          = azurerm_subnet.subnet.id
   vm_size            = "Standard_B2ms"
   admin_username     = "adminuser"
-  admin_password     = "P@ssw0rd123"
+  admin_password     = var.admin_password
   is_windows         = true
 }

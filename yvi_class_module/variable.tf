@@ -9,3 +9,6 @@ type = string
 }
 variable "is_windows" { type = bool }
 variable "ssh_key_path" { default = "~/.ssh/id_rsa.pub" }
+variable "ssh_key_data" {
+  default = "ssh-rsa AAAAB3..."
+}
